@@ -1,0 +1,35 @@
+// middleware.ts
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export async function middleware(request: NextRequest) {
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return request.cookies.getAll() },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            request.cookies.set(name, value)
+          )
+        },
+      },
+    }
+  )
+
+  const { data: { session } } = await supabase.auth.getSession()
+
+  // ログインしていないのに / にアクセスしたらログイン画面に強制
+  if (!session && request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // ログイン済みならOK
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/'],
+}
