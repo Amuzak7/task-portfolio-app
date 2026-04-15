@@ -2,3 +2,21 @@
 
 /* ★★★ Tailwind v4 で dark: クラスを有効化 ★★★ */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* PCブラウザで開いたときもスマホ幅に強制 */
+body {
+  max-width: 480px;
+  /* スマホ幅（iPhone程度） */
+  margin: 0 auto;
+  /* 中央寄せ */
+  background: #f8fafc;
+  /* 軽い背景（任意） */
+  min-height: 100vh;
+}
+
+/* メインコンテンツもスマホ幅に制限 */
+main,
+.max-w-md {
+  max-width: 480px;
+  margin: 0 auto;
+}
