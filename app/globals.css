@@ -20,3 +20,17 @@ main,
   max-width: 480px;
   margin: 0 auto;
 }
+
+/* ====================== FAB（新規タスクボタン）をスマホ幅内に固定 ====================== */
+.fixed.bottom-8.right-8 {
+  right: 2rem !important;
+  /* right-8 = 2rem */
+  /* PCで画面が広い場合でも、480pxの右端から2remの位置に固定 */
+}
+
+@media (min-width: 481px) {
+  .fixed.bottom-8.right-8 {
+    right: calc(50% - 240px + 2rem) !important;
+    /* 480px/2 = 240px */
+  }
+}
