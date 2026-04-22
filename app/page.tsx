@@ -294,7 +294,7 @@ useLayoutEffect(() => {
       </header>
 
       {currentView !== 'task-list' && (
-        <div className="max-w-md px-0 pt-6 pb-4 relative">
+        <div className="max-w-xl px-0 pt-6 pb-4 relative">
           {currentView === 'home' && !isFromCalendar && (
             <div className="flex items-center justify-between">
               <button onClick={() => setCurrentDate(subDays(currentDate, 1))} className="text-blue-600 dark:text-blue-400 font-medium px-6 py-2">Prev</button>
